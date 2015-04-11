@@ -1,5 +1,6 @@
 from flask import Flask
 from flask import request
+from flask import render_template
 import sqlite3 as lite
 import re
 import copy
@@ -10,11 +11,13 @@ app = Flask(__name__)
 @app.route('/', methods=["GET"])
 def home():
     q = request.args.get('q') or None
-    returnval = ""
     permutations = []
     words = []
 
-    curr_len = len(q)
+    if q is not None:
+        curr_len = len(q)
+    else:
+        curr_len = 0
     curr_idx = 0
 
     while curr_len > 0:
@@ -37,7 +40,6 @@ def home():
         rows = cur.fetchall()
 
         for row in rows:
-            returnval += row["word"] + "\n"
             words.append(row["word"])
     except lite.Error, e:
 
@@ -51,34 +53,20 @@ def home():
     #Determine results using q and words
     results = [[]]
 
-    for i in range(0,len(q)):
-        for ri in range(0,len(results)):
-            r = results[ri]
-            if reslen(r) == i:
-                current_r = copy.copy(r)
-                r.append([q[i],0])
-                for w in words:
-                    if w[0] == q[i].upper() and reslen(current_r)+len(w) <= len(q):
-                    # if reslen(current_r)+len(w) <= len(q):
-                        print q[i:i+len(w)].upper() + " =?= " + w
-                        if w == q[i:i+len(w)].upper():
+    if q is not None:
+        for i in range(0,len(q)):
+            for ri in range(0,len(results)):
+                r = results[ri]
+                if reslen(r) == i:
+                    current_r = copy.copy(r)
+                    r.append([q[i],0])
+                    for w in words:
+                        if reslen(current_r)+len(w) <= len(q) and w == q[i:i+len(w)].upper():
                             new = copy.copy(current_r)
                             new.append([w,len(w)])
                             results.append(new)
 
-
-    # for word in words:
-    #     # if word.startswith(q[0].upper()):
-    #     if q.upper().startswith(word):
-    #         results.append([(word,True)])
-    #
-    # for result in results:
-    #     matchwords(results,result,words,q[len(results[0][0]):])
-
-    print results
-
-    # return returnval
-    return returnval + '<br><br><br><br><br><br>' + json.dumps(results)
+    return render_template('main.html',results = json.dumps(results), query=q, words=json.dumps(words))
 
 def reslen(result):
     length = 0
@@ -88,12 +76,6 @@ def reslen(result):
     else:
         length = -1
     return length
-
-# def matchwords(results,result,words,query):
-#     for word in words:
-#         # if word.startswith(query[0]):
-#         if query.upper().startswith(word) and result is not None:
-#             results.append(result.append([(word,True)]))
 
 if __name__ == '__main__':
     app.debug=True
