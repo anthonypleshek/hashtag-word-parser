@@ -36,7 +36,7 @@ def home():
         cur = con.cursor()
         # cur.execute('SELECT word FROM words WHERE word LIKE \"%'+q+'%\"')
         # print 'SELECT word FROM words WHERE word IN (\"'+'\",\"'.join(permutations)+'\")'
-        cur.execute('SELECT DISTINCT(UPPER(word)) as word FROM words WHERE UPPER(word) IN (\"'+'\",\"'.join(permutations)+'\")')
+        cur.execute('SELECT DISTINCT(UPPER(word)) as word FROM words WHERE UPPER(word) IN (\"'+'\",\"'.join(permutations)+'\") AND LENGTH(word) > 1')
 
         rows = cur.fetchall()
 
@@ -71,7 +71,7 @@ def home():
     for idx in results:
         print idx;
     # return render_template('main.html',results = json.dumps(results), query=q, words=json.dumps(words))
-    return render_template('main.html',results = sorted(results,key=lambda x : resscore(x), reverse=True), query=q, words=words)
+    return render_template('main.html',results=sorted(results,key=lambda x:resscore(x),reverse=True),query=q,words=words)
 
 def reslen(result):
     length = 0
