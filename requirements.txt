@@ -1,13 +1,7 @@
-catalyze==1.1.0
-catalyze-internal==1.5.0
-click==3.3
-Cython==0.22
-falcon==0.2
 Flask==0.10.1
 gevent==1.0.1
 gnureadline==6.3.3
 greenlet==0.4.5
-gunicorn==19.2.1
 ipython==3.0.0
 itsdangerous==0.24
 Jinja2==2.7.3
@@ -16,6 +10,5 @@ pycrypto==2.6.1
 python-mimeparse==0.1.4
 requests==2.4.3
 six==1.9.0
-vboxapi==1.0
 virtualenv==12.0.6
 Werkzeug==0.10.4
