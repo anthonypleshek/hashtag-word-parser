@@ -11,11 +11,12 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
 def home():
-    q = request.args.get('q').lower() or None
+    q = request.args.get('q') or None
     permutations = []
     words = []
 
     if q is not None:
+        q = q.lower()
         curr_len = len(q)
     else:
         curr_len = 0
@@ -84,9 +85,10 @@ def reslen(result):
 
 def resscore(result):
     score = 0.0
-    for r in result:
-        score += r['score']
-    score = score/len(result)
+    if len(result) > 0:
+        for r in result:
+            score += r['score']
+        score = score/len(result)
     return score
 
 if __name__ == '__main__':
