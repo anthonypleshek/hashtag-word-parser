@@ -1,13 +1,14 @@
 <!doctype html>
 <head>
-  <title>Hashtag Parser</title>
+  <title>Hashtag/Handle Parser</title>
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
-  <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
 </head>
 <body>
   <div>
-    <h1>Hashtag Parser</h1>
-    <span>Enter a hashtag/handle</span><input id="query" name="query"><button onclick="submitQuery()">Submit</button>
+    <h1>Hashtag/Handle Parser</h1>
+    <form>
+      <span>Enter a hashtag/handle</span><input id="query" name="q"><button type="submit">Submit</button>
+    </form>
   </div>
   <p>Query: {{query}}</p>
   <p>Words Matched: {{", ".join(words)}}</p>
