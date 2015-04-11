@@ -1,3 +1,4 @@
 dictionary.db
 import.py
-words.txt
+words*.txt
+hashtag
