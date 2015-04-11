@@ -10,7 +10,7 @@ app = Flask(__name__)
 
 @app.route('/', methods=["GET"])
 def home():
-    q = request.args.get('q') or None
+    q = request.args.get('q').lower() or None
     permutations = []
     words = []
 
