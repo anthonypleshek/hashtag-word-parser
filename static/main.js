@@ -1,11 +1,19 @@
+var query = "";
+var words = [];
 var results = [];
 
 function submitQuery() {
-  console.log('here');
+  window.location.href = window.location.href.substr(0,window.location.href.indexOf('&')) + "?q=" + document.getElementById("query").value;
 }
 
-function sortResults(results) {
+function initialize(query, words, results) {
+  this.query = query;
+  this.words = words;
   this.results = results;
+  sortResults();
+}
+
+function sortResults() {
   this.results.sort(function(a,b) {
     return getResultScore(b)-getResultScore(a);
   });

@@ -4,10 +4,10 @@
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
   <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
 </head>
-<body onload="sortResults({{results}})">
+<body onload="initialize('{{query}}',{{words}},{{results}})">
   <div>
     <h1>Hashtag Parser</h1>
-    <span>Enter a hashtag/handle</span><input name="query"><button onclick="submitQuery()">Submit</button>
+    <span>Enter a hashtag/handle</span><input id="query" name="query"><button onclick="submitQuery()">Submit</button>
   </div>
   {% if results %}
     <p>{{query}}</p>
