@@ -2,18 +2,15 @@
 <head>
   <title>Hashtag Parser</title>
   <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
-  <script type="text/javascript" src="{{url_for('static', filename='main.js')}}"></script>
 </head>
-<body onload="initialize('{{query}}',{{words}},{{results}})">
+<body>
   <div>
     <h1>Hashtag Parser</h1>
     <span>Enter a hashtag/handle</span><input id="query" name="query"><button onclick="submitQuery()">Submit</button>
   </div>
-  {% if results %}
-    <p>{{query}}</p>
-    <p>{{words}}</p>
-    <p>{{results}}</p>
-  {% else %}
-    <h1>Please enter a query</h1>
-  {% endif %}
+  <p>{{query}}</p>
+  <p>{{words}}</p>
+  {% for result in results %}
+    <p>{{result}}</p>
+  {% endfor %}
 </body>
