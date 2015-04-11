@@ -70,8 +70,6 @@ def home():
                             new.append({"w":str(w),"score":len(w)})
                             results.append(new)
 
-    for idx in results:
-        print idx;
     # return render_template('main.html',results = json.dumps(results), query=q, words=json.dumps(words))
     return render_template('main.html',results=sorted(results,key=lambda x:resscore(x),reverse=True),query=q,words=words)
 
