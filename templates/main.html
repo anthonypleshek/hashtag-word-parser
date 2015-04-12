@@ -7,18 +7,22 @@
   <div>
     <h1>Hashtag/Handle Parser</h1>
     <form>
-      <span>Enter a hashtag/handle</span><input id="query" name="q"><button type="submit">Submit</button>
+      <span>Enter a hashtag/handle (20 characters max)</span><br>
+      <input id="query" name="q"><button type="submit">Submit</button>
     </form>
   </div>
-  <p>Query: {{query}}</p>
-  <p>Words Matched: {{", ".join(words)}}</p>
   <div>
-    <h4>Results</h4>
-    {% for result in results %}
-      {% for item in result %}
-        <span> {{item['w']}} </span>
+    <h2>Results</h2>
+    <p>Query: {{query}}</p>
+    <p>Words Matched: {{", ".join(words)}}</p>
+    <div>
+      <h4>Combinations</h4>
+      {% for result in results %}
+        {% for item in result %}
+          <span> {{item['w']}} </span>
+        {% endfor %}
+        </br>
       {% endfor %}
-      </br>
-    {% endfor %}
+    </div>
   </div>
 </body>
