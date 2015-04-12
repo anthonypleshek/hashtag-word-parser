@@ -13,6 +13,8 @@ app = Flask(__name__)
 @app.route('/', methods=["GET"])
 def home():
     q = request.args.get('q') or None
+    if len(q) > 20:
+        q = q[0:20]
     permutations = []
     words = []
 
