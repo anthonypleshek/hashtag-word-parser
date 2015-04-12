@@ -38,8 +38,6 @@ def home():
         con.row_factory = lite.Row
 
         cur = con.cursor()
-        # cur.execute('SELECT word FROM words WHERE word LIKE \"%'+q+'%\"')
-        # print 'SELECT word FROM words WHERE word IN (\"'+'\",\"'.join(permutations)+'\")'
         cur.execute('SELECT DISTINCT(UPPER(word)) as word FROM words WHERE UPPER(word) IN (\"'+'\",\"'.join(permutations)+'\") AND LENGTH(word) > 1')
 
         rows = cur.fetchall()
@@ -64,7 +62,6 @@ def home():
                 r = results[ri]
                 if reslen(r) == i:
                     current_r = copy.copy(r)
-                    # r.append([q[i],0])
                     r.append({"w":str(q[i]),"score":0})
                     for w in words:
                         if reslen(current_r)+len(w) <= len(q) and w == q[i:i+len(w)].upper():
@@ -72,7 +69,6 @@ def home():
                             new.append({"w":str(w),"score":len(w)})
                             results.append(new)
 
-    # return render_template('main.html',results = json.dumps(results), query=q, words=json.dumps(words))
     return render_template('main.html',results=sorted(results,key=lambda x:resscore(x),reverse=True),query=q,words=words)
 
 def reslen(result):
