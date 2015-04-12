@@ -4,9 +4,9 @@ Enter a hashtag, handle, or any string of characters, and receive all combinatio
 Currently using a list of words generated using http://app.aspell.net/create
 
 ## Running
-1. Local (note: does NOT work with Python3)
+#### Local (note: does NOT work with Python3)
 - `pip install -r requirements.txt`
 - `python app.py`
 
-2. Push it to heroku
+#### Push it to heroku
 - https://devcenter.heroku.com/articles/getting-started-with-python#deploy-the-app
